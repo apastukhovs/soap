@@ -1,7 +1,6 @@
 <?
-class SOAP
+class SOAP implements iSOAP
 {
-    private $url;
     public function __construct($url) 
     {
         $this->url=$url;
