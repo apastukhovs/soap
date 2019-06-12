@@ -24,7 +24,6 @@
 	<?php if($currency) : ?>
 	<div><p><b>Currency:</b> <?php echo $currency; ?></p></div>
 	<?php endif; ?>
-  </div>
-  
+  </div> 
 </body>
 </html>
