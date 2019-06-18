@@ -28,7 +28,7 @@ class SoapAutoStore
 	
 	public function getListAuto()
 	{
-		$sql = "SELECT id, brand, model FROM cars";
+		$sql = "SELECT id, make_id, model FROM autostore_cars";
 		$this->con->query($sql);
 		$res = $this->con->resultset();
 		
@@ -37,7 +37,7 @@ class SoapAutoStore
 	
 	public function getListBrand()
 	{
-		$sql = "SELECT DISTINCT brand FROM cars";
+		$sql = "SELECT DISTINCT make FROM autostore_make";
 		$this->con->query($sql);
 		$res = $this->con->resultset();
 		
@@ -46,7 +46,7 @@ class SoapAutoStore
 	
 	public function getListModel()
 	{
-		$sql = "SELECT DISTINCT model FROM cars";
+		$sql = "SELECT DISTINCT model FROM autostore_cars";
 		$this->con->query($sql);
 		$res = $this->con->resultset();
 		
@@ -55,7 +55,7 @@ class SoapAutoStore
 	
 	public function getListYear()
 	{
-		$sql = "SELECT DISTINCT Year FROM cars";
+		$sql = "SELECT DISTINCT year_model FROM autostore_cars";
 		$this->con->query($sql);
 		$res = $this->con->resultset();
 		
@@ -64,9 +64,28 @@ class SoapAutoStore
 	
 	public function getListEngine()
 	{
-		$sql = "SELECT DISTINCT engine FROM cars";
+		$sql = "SELECT DISTINCT engine FROM autostore_cars";
 		$this->con->query($sql);
 		$res = $this->con->resultset();
 		
 		return $res;
 	}
+
+	public function getListSpeed()
+	{
+		$sql = "SELECT DISTINCT speed FROM autostore_cars";
+		$this->con->query($sql);
+		$res = $this->con->resultset();
+		
+		return $res;
+	}
+	public function getListPrice()
+	{
+		$sql = "SELECT DISTINCT price FROM autostore_cars";
+		$this->con->query($sql);
+		$res = $this->con->resultset();
+		
+		return $res;
+	}
+
+}
