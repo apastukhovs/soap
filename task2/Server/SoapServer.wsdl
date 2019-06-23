@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions name="AutoStore"
+             targetNamespace="http://192.168.0.15/~user4/soap/task2/server/"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="http://192.168.0.15/~user4/soap/task2/server/"
+             xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+
+    <types>
+        <xs:schema targetNamespace="http://192.168.0.15/~user4/soap/task2/server/">
+        
+            <xs:complexType name="CarDetails">
+                <xs:sequence>
+                    <xs:element name="id" type="xs:integer" />
+                    <xs:element name="make" type="xs:string" />
+                    <xs:element name="model" type="xs:string" />
+                    <xs:element name="year_model" type="xs:integer" />
+                    <xs:element name="engine" type="xs:float" />
+                    <xs:element name="speed" type="xs:integer" />
+                    <xs:element name="color" type="xs:string" />
+                    <xs:element name="price" type="xs:integer" />
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:element name="CarsList" type="tns:CarsListType"/>
+                <xs:complexType name="CarsListType">
+                <xs:sequence>
+                    <xs:element name="x" type="xs:array" 
+                        minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:element name="getCarsListRequestType">
+                <xs:complexType>
+                    <xs:sequence/>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="getCarsDetailsRequestType">
+                <xs:complexType>
+                    <xs:sequence/>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="getCarByIdRequestType">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Id" type="xs:integer" minOccurs="1" maxOccurs="1" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="getCarsByParamsType">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="year_model" type="xs:integer" minOccurs="1" maxOccurs="1" />
+                        <xs:element name="model" type="xs:string" minOccurs="0" maxOccurs="1" />
+                        <xs:element name="engine" type="xs:float" minOccurs="0" maxOccurs="1" />
+                        <xs:element name="color" type="xs:string" minOccurs="0" maxOccurs="1" />
+                        <xs:element name="speed" type="xs:integer" minOccurs="0" maxOccurs="1" />
+                        <xs:element name="price" type="xs:integer" minOccurs="0" maxOccurs="1" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+        </xs:schema>
+    </types>
+
+
+    <message name="getListAutoRequest">
+        <part name="parameters" element="tns:getListAutoRequestType"/>
+    </message>
+    <message name="getListAutoResponse">
+        <part name="parameters" type="tns:CarsList"/>
+    </message>
+
+    <message name="getCarsDetailsRequest">
+        <part name="parameters" element="tns:getCarsDetailsRequestType"/>
+    </message>
+    <message name="getCarsDetailsResponse">
+        <part name="parameters" type="tns:CarsList"/>
+    </message>
+
+    <message name="getCarByIdRequest">
+        <part name="parameters" element="tns:getCarByIdRequestType"/>
+    </message>
+    <message name="getCarByIdResponse">
+        <part name="parameters" type="tns:CarDetails"/>
+    </message>
+
+    <message name="getCarsByParamsRequest">
+        <part name="parameters" element="tns:getCarsByParamsType"/>
+    </message>
+    <message name="getCarsByParamsResponse">
+        <part name="parameters" type="tns:CarsList"/>
+    </message>
+
+
+
+    <portType name="AutoStoreType">
+
+        <operation name="getCarsList">
+            <input message="tns:getCarsListRequest"/>
+            <output message="tns:getCarsListResponse"/>
+        </operation>
+
+        <operation name="getCarsDetails">
+            <input message="tns:getCarsDetailsRequest"/>
+            <output message="tns:getCarsDetailsResponse"/>
+        </operation>
+
+        <operation name="getCarById">
+            <input message="tns:getCarByIdRequest"/>
+            <output message="tns:getCarByIdResponse"/>
+        </operation>
+
+        <operation name="getCarsByParams">
+            <input message="tns:getCarsByParamsRequest"/>
+            <output message="tns:getCarsByParamsResponse"/>
+        </operation>
+
+    </portType>
+
+    <binding name="AutoStoreBinding" type="tns:AutoStoreType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+        <operation name="getCarsList">
+            <soap:operation soapAction="" style="document"/>
+                <input>
+                    <soap:body use="literal"/>
+                </input>
+                <output>
+                    <soap:body use="literal"/>
+                </output>
+        </operation>
+        
+        <operation name="getCarsDetails">
+            <soap:operation soapAction="" style="document"/>
+                <input>
+                    <soap:body use="literal"/>
+                </input>
+                <output>
+                    <soap:body use="literal"/>
+                </output>
+        </operation>
+
+        <operation name="getCarById">
+            <soap:operation soapAction="" style="document"/>
+                <input>
+                    <soap:body use="literal"/>
+                </input>
+                <output>
+                    <soap:body use="literal"/>
+                </output>
+        </operation>
+
+        <operation name="getCarsByParams">
+            <soap:operation soapAction="" style="document"/>
+                <input>
+                    <soap:body use="literal"/>
+                </input>
+                <output>
+                    <soap:body use="literal"/>
+                </output>
+        </operation>
+
+    </binding>
+
+    <service name="AutoStore">
+        <port name="AutoStoreSoap" binding="AutoStoreBinding">
+            <soap:address location="http://192.168.0.15/~user4/soap/task2/server/index.php"/>
+        </port>
+    </service>
+</definitions>
