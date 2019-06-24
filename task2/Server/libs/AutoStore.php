@@ -1,89 +1,145 @@
 <?php
-include ('Database.php');
-class AutoStore
+class Autostore
 {
-    private $autoList;
-    private $link;
-    public function __construct()
+    public function getCarList()
     {
-        $db = new db;
-        $this->link = $db->getConnection();
-        
-    }
-    function show()
-    {
-        print_r($this->autoList);
-    }
-
-    function carsList()
-    {
-        $resultArray = array();
-
-        foreach($this->con->query('SELECT Cars.id, CarsModel.name, model 
-        from Cars,CarsModel 
-        where id_name = CarsModel.id') as $row) {
-            $tmp_arr = array('id'=>$row['id'],'model'=>$row['model'],'name'=>$row['name']);
-            array_push($resultArray, $tmp_arr); 
+        try
+        {
+            $mysql = new MySQL();
+            $mysql->setSql("SELECT id, mark, model FROM Cars");
+            $result = $mysql->select();
+        }catch(Exception $e)
+        {
+            throw new SoapFault("Server", $e->getMessage() );
         }
-       
-        return $resultArray;
+        return $result->fetchAll(PDO::FETCH_OBJ);
     }
-
-    function oneAuto($id)
+    public function getById($param)
     {
-        $resultArray = array();
-       
-        $stmt = $this->con->prepare("SELECT Cars.id, CarsModel.name, model , year , engin , color, max_speed, price
-        FROM Cars,CarsModel WHERE id_name = CarsModel.id  
-        AND Cars.id = ?");
-        $stmt->execute([$id]); 
-        $row = $stmt->fetch();
-
-            $tmp_arr = array(
-            'id'=>$row['id'],    
-            'modelName'=>$row['name'].":".$row['model'],
-            'year'=>$row['year'],
-            'engine'=>$row['engin'],
-            'color'=>$row['color'],
-            'maxspeed'=>$row['max_speed'],
-            'price'=>$row['price']);
-            array_push($resultArray, $tmp_arr); 
-        
-        return $resultArray;
-    }
-
-    function searchAuto()
-    {
-        $val = 'BMW';
-        $searchParam = 'Name';
-
-        $arr = array();
-
-        $arr = array();
-
-        foreach($this->con->query('SELECT Cars.id, CarsModel.name, model 
-        from Cars,CarsModel 
-        where id_name = CarsModel.id') as $row) {
-            $tmp_arr = array('id'=>$row['id'],'model'=>$row['model'],'name'=>$row['name']);
-            array_push($arr, $tmp_arr); 
+        $id = $param->id;
+        if ( !$id || !is_numeric($id) || $id<0)
+        {
+            throw new SoapFault("Server", ERR_CAR_ID_INVALID);
         }
-       
-        return $arr;
-
-        foreach ($this->autoCatalog as $item){
-            if($item[$searchParam] == $val){
-                $tmp_arr = array(
-                    'modelName'=>$item['Name'].":".$item['Model'],
-                    'year'=>$item['Year'],
-                    'engine'=>$item['Engine'],
-                    'color'=>$item['Color'],
-                    'maxspeed'=>$item['MaxSpeed'],
-                    'price'=>$item['Price']
-                );
-                array_push($arr, $tmp_arr);    
+        try
+        {
+            $mysql = new MySQL();
+            $mysql->setSql("SELECT id, mark, model, year, engine, color, maxspeed, price FROM Cars WHERE id=$id");
+            $result = $mysql->select();
+        }catch(Exception $e)
+        {
+            throw new SoapFault("Server", $e->getMessage());
+        }
+        return $result->fetch(PDO::FETCH_OBJ);
+    }
+    public function Order($order)
+    {
+        $idcar = $order->idcar;
+        $type_pay = $order->payment;
+        $cust_name = $order->firstname;
+        $cust_surname = $order->lastname;
+        if ( !$idcar || !is_numeric($idcar) || $idcar<0)
+        {
+            throw new SoapFault("Server",ERR_CAR_ID_INVALID);
+        }
+        if ($type_pay!="cash" && $type_pay!="credit card"){
+            throw new SoapFault("Server", ERR_PAYMENT_TYPE_INVALID);
+        }
+        if (!$cust_name)
+        {
+            throw new SoapFault("Server", ERR_CUSTOMER_NAME_EMPTY);
+        }
+        if (!$cust_surname)
+        {
+            throw new SoapFault("Server", ERR_CUSTOMER_SURNAME_EMPTY);
+        }
+        try
+        {
+            $mysql = new MySQL();
+            $sql = "INSERT INTO Orders(id, idcar, type_pay, cust_name, cust_surname) 
+                VALUES(?, ?, ?, ?, ?)";
+            $params = [0, $idcar, $type_pay, $cust_name, $cust_surname];
+            $mysql->setSql($sql);
+            $mysql->insert($params);
+        }catch(Exception $e)
+        {
+            throw new SoapFault("Server", $e->getMessage()); 
+        }
+        return (object) ['id'=>$idcar];
+    }
+    public function CarFilter($data)
+    {
+        $year = $data->year;
+        $mark = $data->mark;
+        $model = $data->model;
+        $engine = $data->engine;
+        $color = $data->color;
+        $maxspeed = $data->maxspeed;
+        $price = $data->price;
+        var_dump($data);
+        if (!$year || !is_integer($year) || $year<1930 || $year>2018)
+        {
+            throw new SoapFault("Server", ERR_YEAR_INVALID); 
+        }
+        $sql="SELECT id, mark, model FROM Cars";
+        $sql.=" WHERE year=$year";
+        if ($mark)
+        {
+            if (!is_string($mark))
+            {
+                throw new SoapFault("Server", ERR_MARK_INVALID); 
             }
+            $sql.=" AND mark='$mark'";
         }
-        return $arr;
+        if ($model)
+        {
+            if (!is_string($model))
+            {
+                throw new SoapFault("Server", ERR_MODEL_INVALID); 
+            }
+            $sql.=" AND model='$model'";
+        }
+        if ($engine)
+        {
+            if (!is_numeric($engine) || $engine<0)
+            {
+                throw new SoapFault("Server", ERR_ENGINE_INVALID); 
+            }
+            $sql.=" AND engine=$engine";
+        }
+        if ($color)
+        {
+            if (!is_string($color))
+            {
+                throw new SoapFault("Server", ERR_COLOR_INVALID); 
+            }
+            $sql.=" AND color='$color'";
+        }
+        if ($maxspeed)
+        {
+            if (!is_integer($maxspeed) || $maxspeed<0)
+            {
+                throw new SoapFault("Server", ERR_MAXSPEED_INVALID); 
+            }
+            $sql.=" AND maxspeed=$maxspeed";
+        }
+        if ($price)
+        {
+            if (!is_numeric($price) || $price<0)
+            {
+                throw new SoapFault("Server", ERR_PRICE_INVALID); 
+            }
+            $sql.=" AND price=$price";
+        }
+        try
+        {
+            $mysql = new MySQL();
+            $mysql->setSql($sql);
+            $result = $mysql->select();
+        }catch(Exception $e)
+        {
+            throw new SoapFault("Server", $e->getMessage()); 
+        }
+        return $result->fetchAll(PDO::FETCH_OBJ);
     }
-
 }
