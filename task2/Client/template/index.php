@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-
-        <title><?php echo TITLE ?></title>
-       
+        <link href="template/css/bootstrap.min.css" rel="stylesheet">
+        <link href="template/css/style.css" rel="stylesheet">
+        <title><?php echo TITLE ?></title>      
     </head>
     <body>
 
@@ -20,7 +20,7 @@
 
             <form name="filterform" id="filterform" action="javascript:void(0);">
                 <div class="form-group row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-6">
                         <h3>Filter options</h3>
                         <button type="submit" class="btn btn-success"
                                               onclick="searchCars()">Search</button>
@@ -115,27 +115,6 @@
             </div>
 
         </div>
-        <div class="row">
-
-        <form name="carorder" class="col-lg-5" id="carorder" action="javascript:void(0);">
-            <input type="hidden" name="id" id="id" value="<?php echo $_POST['id']; ?>"/>
-
-            <label for="name">Name</label>
-            <input type="text" class="form-control"
-                            name="name" id="name" value="" placeholder="Enter your Name">
-
-            <label for="surname">Surname</label>
-            <input type="text" class="form-control"
-                            name="surname" id="surname" value="" placeholder="Enter your Surname">
-
-            <label for="paytype">Select type pay</label>
-            <select class="form-control" name="paytype" id="paytype">
-                <option value="credit card">Credit card</option>
-                <option value="cash">Cash</option>
-            </select>
-        </form>
-        </div>
-
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
