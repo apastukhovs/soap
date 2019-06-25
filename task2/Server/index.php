@@ -14,7 +14,7 @@ if(array_key_exists('wsdl', $_GET))
 }
 else
 {
-    $server = new AutoStore(WSDL_URL);
+    $server = new SoapServer(WSDL_URL);
     $server->setClass("AutoStore");
     $server->handle();
 }

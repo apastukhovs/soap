@@ -11,6 +11,7 @@ if (isset($_POST['action']))
     if ($action == 'getCarList')
     {
         echo $client->getCarList();
+        var_dump($client);
     }
     else if($action == 'searchCars')
     {

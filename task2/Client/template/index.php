@@ -4,9 +4,7 @@
         <meta charset="utf-8">
 
         <title><?php echo TITLE ?></title>
-        <link href="html/css/bootstrap.min.css" rel="stylesheet">
-        <link href="html/css/my.css" rel="stylesheet">
-
+       
     </head>
     <body>
 
@@ -139,12 +137,12 @@
         </div>
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <script src="html/js/bootstrap.min.js"></script>
+        <script src="template/js/bootstrap.min.js"></script>
 
-        <script src="html/js/script.js"></script>
+        <script src="template/js/main.js"></script>
 
 
     </body>
