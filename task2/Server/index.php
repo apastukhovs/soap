@@ -2,7 +2,7 @@
 require_once 'config.php';
 require_once 'libs/Sql.php';
 require_once 'libs/MySql.php';
-require_once 'libs/Autostore.php';
+require_once 'libs/AutoStore.php';
 ini_set("soap.wsdl_cache_enabled", 0);
 if(array_key_exists('wsdl', $_GET))
 {
@@ -14,7 +14,7 @@ if(array_key_exists('wsdl', $_GET))
 }
 else
 {
-    $server = new Autostore(WSDL_URL);
-    $server->setClass("Autostore");
+    $server = new AutoStore(WSDL_URL);
+    $server->setClass("AutoStore");
     $server->handle();
 }

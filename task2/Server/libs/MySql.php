@@ -1,6 +1,6 @@
 <?php
-include_once "SQL.php";
-class MySql extends SQL
+include_once "Sql.php";
+class MySql extends Sql
 {
     function connect()
     {

@@ -1,5 +1,5 @@
 <?php
-class SQL
+class Sql
 {
     private $link;
     private $sql;

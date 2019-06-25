@@ -1,11 +1,11 @@
 <?php
-class Autostore
+class AutoStore
 {
     public function getCarList()
     {
         try
         {
-            $mysql = new MySQL();
+            $mysql = new MySql();
             $mysql->setSql("SELECT id, mark, model FROM Cars");
             $result = $mysql->select();
         }catch(Exception $e)
@@ -23,7 +23,7 @@ class Autostore
         }
         try
         {
-            $mysql = new MySQL();
+            $mysql = new MySql();
             $mysql->setSql("SELECT id, mark, model, year, engine, color, maxspeed, price FROM Cars WHERE id=$id");
             $result = $mysql->select();
         }catch(Exception $e)
@@ -55,7 +55,7 @@ class Autostore
         }
         try
         {
-            $mysql = new MySQL();
+            $mysql = new MySql();
             $sql = "INSERT INTO Orders(id, idcar, type_pay, cust_name, cust_surname) 
                 VALUES(?, ?, ?, ?, ?)";
             $params = [0, $idcar, $type_pay, $cust_name, $cust_surname];
@@ -133,7 +133,7 @@ class Autostore
         }
         try
         {
-            $mysql = new MySQL();
+            $mysql = new MySql();
             $mysql->setSql($sql);
             $result = $mysql->select();
         }catch(Exception $e)

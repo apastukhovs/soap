@@ -1,5 +1,5 @@
 <?php
-class CarClient
+class Car
 {
     private $client;
     public function __construct()
