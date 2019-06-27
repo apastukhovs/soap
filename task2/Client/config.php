@@ -1,5 +1,5 @@
 <?
-define('SERVER_URL','http://192.168.0.15/~user4/soap/task2/server/index.php');
+define('SERVER_URL','http://192.168.0.15/~user4/soap/task2/Server/?WSDL');
 define("TEMPLATE_DIR",__DIR__."/template/");
 define("TEMPLATE",TEMPLATE_DIR."index.php");
 define("TEMPLATE_ORDER",TEMPLATE_DIR."order.php");

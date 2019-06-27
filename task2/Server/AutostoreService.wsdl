@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" 
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
-    xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" 
-    xmlns:tns="http://192.168.0.15/~user4/soap/task2/server/" 
-    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+<definitions targetNamespace="http://192.168.0.15/~user4/soap/task2/server/"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:tns="http://192.168.0.15/~user4/soap/task2/server/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding"
     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
-    name="carWSDL" 
+    name="AutoStore" 
     >
     <types>
         <xs:schema
             elementFormDefault="qualified"
-            targetNamespace="http://192.168.0.15/~user4/soap/task2/server/">
+            targetNamespace="http://192.168.0.15/~user4/soap/task2/Server/">
             <xs:complexType
-                name="Car">
+                name="AutoStore">
                 <xs:sequence>
                     <xs:element
                         name="id"
@@ -216,7 +216,7 @@
         type="tns:CarList"/>
 </message>
 <portType
-    name="CarServiceSoapType">
+    name="AutostoreServiceType">
     <operation
         name="getCarList">
         <input
@@ -247,8 +247,8 @@
     </operation>
 </portType>
 <binding
-    name="CarServiceSoapBinding"
-    type="tns:CarServiceSoapType">
+    name="AutostoreServiceBinding"
+    type="tns:AutostoreServiceType">
     <soap:binding
         style="document"
         transport="http://schemas.xmlsoap.org/soap/http"/>
@@ -310,12 +310,12 @@
     </operation>
 </binding>
 <service
-    name="CarService">
+    name="AutostoreService">
     <port
-        name="CarServiceSoap"
-        binding="tns:CarServiceSoapBinding">
+        name="AutostoreService"
+        binding="tns:AutostoreServiceBinding">
         <soap:address
-            location="http://192.168.0.15/~user4/soap/task2/server/index.php"/>
+            location="http://192.168.0.15/~user4/soap/task2/Server/index.php"/>
     </port>
 </service>
 </definitions>

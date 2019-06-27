@@ -1,4 +1,4 @@
-const url=`http://mysite.local/soap/task2/Client/index.php`;
+const url=`http://192.168.0.15/~user4/soap/task2/Client/index.php`;
 let results = document.getElementById("results");
 
 function getCarList() {

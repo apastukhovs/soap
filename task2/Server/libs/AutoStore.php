@@ -13,7 +13,8 @@ class AutoStore
             throw new SoapFault("Server", $e->getMessage() );
         }
         return $result->fetchAll(PDO::FETCH_OBJ);
-    }
+        
+    }       
     public function getById($param)
     {
         $id = $param->id;
