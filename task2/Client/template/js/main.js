@@ -1,4 +1,4 @@
-const url=`http://mysite.local/soap/task2/client/index.php`;
+const url=`http://192.168.0.15/~user4/soap/task2/Client/index.php`;
 let results = document.getElementById("results");
 
 function getCarList() {
@@ -6,7 +6,21 @@ function getCarList() {
         'action': 'getCarList'
     };
     $.post(url, formData, function (data) {
-        showOnTable(data)
+        console.log(data.Struct.length)
+        for(i=0 ;i<data.Struct.length;i++){
+            console.log(data.Struct[i].id) ;
+            console.log(data.Struct[i].mark) ;
+            console.log(data.Struct[i].model); 
+        }       
+        var dataLength = data.Struct.length;
+        var table = document.createElement('table');
+        document.write('<div className="allCars"><table className="table">');
+        for(i=0; i<dataLength;i++) {
+            var id = data.Struct[i].id;
+            var mark = data.Struct[i].mark;
+            var model = data.Struct[i].model;
+            table = '<tr className="mess-hide"><td className="name"><h4>' + id + '</h4></td><td className="song"><h4>' + mark + '</h4></td><td className="url"><h4>' + model + '</h4></td></tr>';
+        }
     }, "json");
 }
 
@@ -16,7 +30,7 @@ function getDetails(id) {
         'id': id
     };
     $.post(url, formData, function (data) {
-        showOnDetails(data)
+        showOnDetails(data);
     }, "json");
 }
 
@@ -83,6 +97,7 @@ function getOrderForm(id) {
 }
 
 function showOnTable(data) {
+    
     if (data.length != 0) {
         if (data['errors']) {
             results.innerHTML = '<h3 class="text-danger">Error: ' + data.errors + '</h3>';

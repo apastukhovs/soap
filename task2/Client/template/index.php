@@ -112,7 +112,7 @@
 
             <div class="results" id="results">
                 <table class="table" id="table">
-
+    
                 </table>
             </div>
 

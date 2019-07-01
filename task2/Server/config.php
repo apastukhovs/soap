@@ -1,10 +1,10 @@
 <?
 define('WSDL_PATH','./AutostoreService.wsdl');
-define('WSDL_URL','http://mysite.local/soap/task2/Server/?WSDL');
+define('WSDL_URL','http://192.168.0.15/~user4/soap/task2/Server/?WSDL');
 define("HOSTNAME","127.0.0.1");
-define("USERNAME","root");
-define("PASSWORD","user");
-define("DBNAME","users");
+define("USERNAME","user4");
+define("PASSWORD","user4");
+define("DBNAME","user4");
 define ('ERR_CAR_ID_INVALID','Car id is ivalid!');
 define ('ERR_PAYMENT_TYPE_INVALID','Payment type is ivalid!');
 define ('ERR_CUSTOMER_NAME_EMPTY','Customer name is empty!');
