@@ -5,7 +5,7 @@ class AutoStore
     {
         try
         {
-            $mysql = new MySql();
+            $mysql = new MySQL();
             $mysql->setSql("SELECT id, mark, model FROM Cars");
             $result = $mysql->select();
         }catch(Exception $e)
@@ -13,8 +13,7 @@ class AutoStore
             throw new SoapFault("Server", $e->getMessage() );
         }
         return $result->fetchAll(PDO::FETCH_OBJ);
-        
-    }       
+    }
     public function getById($param)
     {
         $id = $param->id;
@@ -24,7 +23,7 @@ class AutoStore
         }
         try
         {
-            $mysql = new MySql();
+            $mysql = new MySQL();
             $mysql->setSql("SELECT id, mark, model, year, engine, color, maxspeed, price FROM Cars WHERE id=$id");
             $result = $mysql->select();
         }catch(Exception $e)
@@ -56,7 +55,7 @@ class AutoStore
         }
         try
         {
-            $mysql = new MySql();
+            $mysql = new MySQL();
             $sql = "INSERT INTO Orders(id, idcar, type_pay, cust_name, cust_surname) 
                 VALUES(?, ?, ?, ?, ?)";
             $params = [0, $idcar, $type_pay, $cust_name, $cust_surname];
@@ -134,7 +133,7 @@ class AutoStore
         }
         try
         {
-            $mysql = new MySql();
+            $mysql = new MySQL();
             $mysql->setSql($sql);
             $result = $mysql->select();
         }catch(Exception $e)

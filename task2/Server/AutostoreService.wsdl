@@ -1,321 +1,187 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<definitions targetNamespace="http://192.168.0.15/~user4/soap/task2/server/"
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions targetNamespace="http://mysite.local/soap/task2/Server/"
     xmlns="http://schemas.xmlsoap.org/wsdl/"
     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-    xmlns:tns="http://192.168.0.15/~user4/soap/task2/server/"
+    xmlns:tns="http://mysite.local/soap/task2/Server/"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding"
     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
     name="AutoStore" 
     >
     <types>
-        <xs:schema
-            elementFormDefault="qualified"
-            targetNamespace="http://192.168.0.15/~user4/soap/task2/Server/">
-            <xs:complexType
-                name="AutoStore">
+        <xs:schema targetNamespace="http://mysite.local/soap/task2/Server/">
+        
+            <xs:complexType name="AutoStore">
                 <xs:sequence>
-                    <xs:element
-                        name="id"
-                        type="xs:long"
-                        minOccurs="1"
-                        maxOccurs="1"/>
-                    <xs:element
-                        name="mark"
-                        type="xs:string"
-                        minOccurs="1"
-                        maxOccurs="1"/>
-                    <xs:element
-                        name="model"
-                        type="xs:string"
-                        minOccurs="1"
-                        maxOccurs="1"/>
-                    <xs:element
-                        name="year"
-                        type="xs:integer"
-                        minOccurs="0"
-                        maxOccurs="1"/>
-                    <xs:element
-                        name="engine"
-                        type="xs:double"
-                        minOccurs="0"
-                        maxOccurs="1"/>
-                    <xs:element
-                        name="color"
-                        type="xs:string"
-                        minOccurs="0"
-                        maxOccurs="1"/>
-                    <xs:element
-                        name="maxspeed"
-                        type="xs:integer"
-                        minOccurs="0"
-                        maxOccurs="1"/>
-                    <xs:element
-                        name="price"
-                        type="xs:double"
-                        minOccurs="0"
-                        maxOccurs="1"/>
+                    <xs:element name="id" type="xs:integer" />
+                    <xs:element name="mark" type="xs:string" />
+                    <xs:element name="model" type="xs:string" />
+                    <xs:element name="year" type="xs:integer" />
+                    <xs:element name="engine" type="xs:float" />
+                    <xs:element name="color" type="xs:string" />
+                    <xs:element name="maxspeed" type="xs:integer" />
+                    <xs:element name="price" type="xs:float" />
                 </xs:sequence>
             </xs:complexType>
-            <xs:complexType
-                name="CarList">
-                <xs:complexContent>
-                    <xs:restriction
-                        base="soapenc:Array">
-                        <xs:attribute
-                            ref="soapenc:arrayType"
-                            wsdl:arrayType="tns:Car[]"/>
-                    </xs:restriction>
-                </xs:complexContent>
+
+            <xs:element name="CarList" type="tns:CarListType"/>
+                <xs:complexType name="CarListType">
+                <xs:sequence>
+                    <xs:element name="x" type="xs:array" 
+                        minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
             </xs:complexType>
-            <xs:element
-                name="getCarListRequestType">
+
+            <xs:element name="getCarListRequestType">
                 <xs:complexType>
                     <xs:sequence/>
                 </xs:complexType>
             </xs:element>
-            <xs:element
-                name="OrderResponseType">
-                <xs:complexType>
-                <xs:sequence>
-                    <xs:element
-                        name="id"
-                        type="xs:long"
-                        minOccurs="1"
-                        maxOccurs="1"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element
-                name="getByIdRequestType">
+
+            <xs:element name="getByIdRequestType">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element
-                            name="id"
-                            type="xs:long"
-                            minOccurs="1"
-                            maxOccurs="1"/>
+                        <xs:element name="id" type="xs:integer" minOccurs="1" maxOccurs="1" />
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:complexType
-                name="OrderType">
-                <xs:sequence>
-                    <xs:element
-                        name="idcar"
-                        type="xs:long"
-                        minOccurs="1"
-                        maxOccurs="1"/>
-                    <xs:element
-                        name="firstname"
-                        type="xs:string"
-                        minOccurs="1"
-                        maxOccurs="1"/>
-                    <xs:element
-                        name="lastname"
-                        type="xs:string"
-                        minOccurs="1"
-                        maxOccurs="1"/>
-                    <xs:element
-                        name="payment"
-                        type="xs:string"
-                        minOccurs="1"
-                        maxOccurs="1"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:element
-                name="CarFilterElement">
+
+            <xs:element name="CarFilterElement">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element
-                            name="year"
-                            type="xs:integer"
-                            minOccurs="1"
-                            maxOccurs="1"/>
-                        <xs:element
-                            name="mark"
-                            type="xs:string"
-                            minOccurs="0"
-                            maxOccurs="1"/>
-                        <xs:element
-                            name="model"
-                            type="xs:string"
-                            minOccurs="0"
-                            maxOccurs="1"/>            
-                        <xs:element
-                            name="engine"
-                            type="xs:double"
-                            minOccurs="0"
-                            maxOccurs="1"/>
-                        <xs:element
-                            name="color"
-                            type="xs:string"
-                            minOccurs="0"
-                            maxOccurs="1"/>
-                        <xs:element
-                            name="maxspeed"
-                            type="xs:integer"
-                            minOccurs="0"
-                            maxOccurs="1"/>
-                        <xs:element
-                            name="price"
-                            type="xs:double"
-                            minOccurs="0"
-                            maxOccurs="1"/>
+                        <xs:element name="year" type="xs:integer" minOccurs="1" maxOccurs="1" />
+                        <xs:element name="model" type="xs:string" minOccurs="0" maxOccurs="1" />
+                        <xs:element name="engine" type="xs:float" minOccurs="0" maxOccurs="1" />
+                        <xs:element name="color" type="xs:string" minOccurs="0" maxOccurs="1" />
+                        <xs:element name="maxspeed" type="xs:integer" minOccurs="0" maxOccurs="1" />
+                        <xs:element name="price" type="xs:float" minOccurs="0" maxOccurs="1" />
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
+
+            <xs:element name="OrderType">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="idcar" type="xs:integer"  minOccurs="1" maxOccurs="1" />
+                        <xs:element name="firstname" type="xs:string"  minOccurs="1" maxOccurs="1" />
+                        <xs:element name="lastname" type="xs:string"  minOccurs="1" maxOccurs="1" />
+                        <xs:element name="payment" type="xs:string"  minOccurs="1" maxOccurs="1" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="OrderResponseType">
+                <complexType/>
+            </xs:element>
+
         </xs:schema>
     </types>
-<message
-    name="OrderRequest">
-    <part
-        name="parameters"
-        type="tns:OrderType"/>
-</message>
-<message
-    name="OrderResponse">
-    <part
-        name="parameters"
-        element="tns:OrderResponseType"/>
-</message>
-<message
-    name="CarFilterRequest">
-    <part
-        name="parameters"
-        element="tns:CarFilterElement"/>
-</message>
-<message
-    name="CarFilterResponse">
-    <part
-        name="parameters"
-        type="tns:CarList"/>
-</message>
-<message
-    name="getByIdRequest">
-    <part
-        name="parameters"
-        element="tns:getByIdRequestType"/>
-</message>
-<message
-    name="getByIdResponse">
-    <part
-        name="parameters"
-        type="tns:Car"/>
-</message>
-<message
-    name="getCarListRequest">
-    <part
-        name="parameters"
-        element="tns:getCarListRequestType"/>
-</message>
-<message
-    name="getCarListResponse">
-    <part
-        name="parameters"
-        type="tns:CarList"/>
-</message>
-<portType
-    name="AutostoreServiceType">
-    <operation
-        name="getCarList">
-        <input
-            message="tns:getCarListRequest"/>
-        <output
-            message="tns:getCarListResponse"/>
-    </operation>
-    <operation
-        name="getById">
-        <input
-            message="tns:getByIdRequest"/>
-        <output
-            message="tns:getByIdResponse"/>
-    </operation>
-    <operation
-        name="Order">
-        <input
-            message="tns:OrderRequest"/>
-        <output
-            message="tns:OrderResponse"/>
-    </operation>
-    <operation
-        name="CarFilter">
-        <input
-            message="tns:CarFilterRequest"/>
-        <output
-            message="tns:CarFilterResponse"/>
-    </operation>
-</portType>
-<binding
-    name="AutostoreServiceBinding"
-    type="tns:AutostoreServiceType">
-    <soap:binding
-        style="document"
-        transport="http://schemas.xmlsoap.org/soap/http"/>
-    <operation
-        name="getCarList">
-        <soap:operation
-            soapAction=""
-            style="document"/>
-        <input>
-            <soap:body
-                use="literal"/>
-        </input>
-        <output>
-            <soap:body
-                use="literal"/>
-        </output>
-    </operation>
-    <operation
-        name="getById">
-        <soap:operation
-            soapAction=""
-            style="document"/>
-        <input>
-            <soap:body
-                use="literal"/>
-        </input>
-        <output>
-            <soap:body
-                use="literal"/>
-        </output>
-    </operation>
-    <operation
-        name="Order">
-        <soap:operation
-            soapAction=""
-            style="document"/>
-        <input>
-            <soap:body
-                use="literal"/>
-        </input>
-        <output>
-            <soap:body
-                use="literal"/>
-        </output>
-    </operation>
-    <operation
-        name="CarFilter">
-        <soap:operation
-            soapAction=""
-            style="document"/>
-        <input>
-            <soap:body
-                use="literal"/>
-        </input>
-        <output>
-            <soap:body
-                use="literal"/>
-        </output>
-    </operation>
-</binding>
+
+
+    <message name="getCarListRequest">
+        <part name="parameters" element="tns:getCarListRequestType"/>
+    </message>
+    <message name="getCarListResponse">
+        <part name="parameters" type="tns:CarList"/>
+    </message>
+
+    <message name="CarFilterRequest">
+        <part name="parameters" element="tns:CarFilterElement"/>
+    </message>
+    <message name="CarFilterResponse">
+        <part name="parameters" type="tns:CarList"/>
+    </message>
+
+    <message name="getByIdRequest">
+        <part name="parameters" element="tns:getByIdRequestType"/>
+    </message>
+    <message name="getByIdResponse">
+        <part name="parameters" type="tns:getByIdResponseType"/>
+    </message>
+
+    <message name="OrderRequest">
+        <part name="parameters" element="tns:OrderType"/>
+    </message>
+    <message name="OrderResponse">
+        <part name="parameters" type="tns:OrderResponseType"/>
+    </message>
+
+
+
+    <portType name="AutostoreServiceType">
+
+        <operation name="getCarList">
+            <input message="tns:getCarListRequest"/>
+            <output message="tns:getCarListResponse"/>
+        </operation>
+
+        <operation name="CarFilter">
+            <input message="tns:CarFilterRequest"/>
+            <output message="tns:CarFilterResponse"/>
+        </operation>
+
+        <operation name="getById">
+            <input message="tns:getByIdRequest"/>
+            <output message="tns:getByIdResponse"/>
+        </operation>
+
+        <operation name="Order">
+                <input message="tns:OrderRequest"/>
+                <output message="tns:OrderResponse"/>
+        </operation>
+
+    </portType>
+
+    <binding name="AutostoreServiceBinding" type="tns:AutostoreServiceType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+        <operation name="getCarList">
+            <soap:operation soapAction="" style="document"/>
+                <input>
+                    <soap:body use="literal"/>
+                </input>
+                <output>
+                    <soap:body use="literal"/>
+                </output>
+        </operation>
+        
+        <operation name="CarFilter">
+            <soap:operation soapAction="" style="document"/>
+                <input>
+                    <soap:body use="literal"/>
+                </input>
+                <output>
+                    <soap:body use="literal"/>
+                </output>
+        </operation>
+
+        <operation name="getById">
+            <soap:operation soapAction="" style="document"/>
+                <input>
+                    <soap:body use="literal"/>
+                </input>
+                <output>
+                    <soap:body use="literal"/>
+                </output>
+        </operation>
+
+        <operation name="Order">
+            <soap:operation soapAction="" style="document"/>
+                <input>
+                    <soap:body use="literal"/>
+                </input>
+                <output>
+                    <soap:body use="literal"/>
+                </output>
+        </operation>
+    </binding>
 <service
     name="AutostoreService">
     <port
         name="AutostoreService"
         binding="tns:AutostoreServiceBinding">
         <soap:address
-            location="http://192.168.0.15/~user4/soap/task2/Server/index.php"/>
+            location="http://mysite.local/soap/task2/Server/index.php"/>
     </port>
 </service>
 </definitions>

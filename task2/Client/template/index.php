@@ -2,9 +2,11 @@
 <html>
     <head>
         <meta charset="utf-8">
+
+        <title><?php echo TITLE ?></title>
         <link href="template/css/bootstrap.min.css" rel="stylesheet">
         <link href="template/css/style.css" rel="stylesheet">
-        <title><?php echo TITLE ?></title>      
+
     </head>
     <body>
 
@@ -20,7 +22,7 @@
 
             <form name="filterform" id="filterform" action="javascript:void(0);">
                 <div class="form-group row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         <h3>Filter options</h3>
                         <button type="submit" class="btn btn-success"
                                               onclick="searchCars()">Search</button>
@@ -115,6 +117,7 @@
             </div>
 
         </div>
+
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->

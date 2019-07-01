@@ -1,5 +1,5 @@
 <?php
-class Car
+class CarClient
 {
     private $client;
     public function __construct()
@@ -16,7 +16,6 @@ class Car
             return json_encode(['errors' => $e->getMessage()]);
         }
         return json_encode($result);
-       
     }
     public function CarFilter($data)
     {

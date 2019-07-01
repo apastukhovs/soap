@@ -18,3 +18,5 @@ else
     $server->setClass("AutoStore");
     $server->handle();
 }
+
+

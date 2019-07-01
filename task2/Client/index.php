@@ -1,48 +1,41 @@
 <?php
-include 'config.php';
-include 'libs/Car.php';
+require_once 'config.php';
+require_once 'libs/CarClient.php';
 header("Access-Control-Allow-Origin: *");
 header('Access-Control-Allow-Headers: *');
 if (isset($_POST['action'])) 
 {
     header('Content-Type: application/json');
-    $client = new Car();
+    $client = new CarClient();
     $action = $_POST['action'];
     if ($action == 'getCarList')
     {
         echo $client->getCarList();
-        var_dump($client);
-    }
-    else if($action == 'searchCars')
+    }else if($action == 'searchCars')
     {
         $filter = $_POST['filter'];
         echo $client->CarFilter($filter);
-    }
-    else if($action == 'getById')
+    }else if($action == 'getById')
     {
         $id = $_POST['id'];
         echo $client->getById($id);
-    }
-    else if($action == 'getOrderForm')
+    }else if($action == 'getOrderForm')
     {
-        include 'template/index.php';
-    }
-    else if($action == 'order')
+        require_once TEMPLATE_ORDER;
+    }else if($action == 'order')
     {
         $orderData = $_POST['orderData'];
         echo $client->Order($orderData);
     }
-    }
-    else if (isset($_GET['action'])) 
+}else if (isset($_GET['action'])) 
+{
+    $action = $_GET['action'];
+    if($action == 'getOrderForm')
     {
-        $action = $_GET['action'];
-        if($action == 'getOrderForm')
-        {
-            include 'template/index.php';
-        }
+        require_once TEMPLATE_ORDER;
     }
-    else
-    {
-        header('Content-Type: text/html');
-        include 'template/index.php';
-    }
+}else
+{
+    header('Content-Type: text/html');
+    require_once TEMPLATE;
+}

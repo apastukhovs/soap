@@ -1,7 +1,13 @@
-.input-group {
-    padding-top: 20px;
+body{
+	background: rgb(250,250,220);
 }
-
-.input-group-addon {
-    padding: 10px;
+.main-form{
+	margin-top: 30px;
+	padding: 10px;
+}
+.form-group{
+	padding: 20px;
+}
+p{
+	padding: 10px;
 }
