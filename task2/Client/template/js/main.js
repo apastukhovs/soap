@@ -1,4 +1,4 @@
-const url=`http://192.168.0.15/~user4/soap/task2/Client/index.php`;
+const url=`http://mysite.local/soap/task2/Client/index.php`;
 let results = document.getElementById("results");
 
 function getCarList() {
@@ -6,21 +6,30 @@ function getCarList() {
         'action': 'getCarList'
     };
     $.post(url, formData, function (data) {
-        console.log(data.Struct.length)
-        for(i=0 ;i<data.Struct.length;i++){
-            console.log(data.Struct[i].id) ;
-            console.log(data.Struct[i].mark) ;
-            console.log(data.Struct[i].model); 
-        }       
-        var dataLength = data.Struct.length;
-        var table = document.createElement('table');
-        document.write('<div className="allCars"><table className="table">');
-        for(i=0; i<dataLength;i++) {
-            var id = data.Struct[i].id;
-            var mark = data.Struct[i].mark;
-            var model = data.Struct[i].model;
-            table = '<tr className="mess-hide"><td className="name"><h4>' + id + '</h4></td><td className="song"><h4>' + mark + '</h4></td><td className="url"><h4>' + model + '</h4></td></tr>';
+        let table = '<table class="table" id="table">';
+    if (data.Struct.length) {
+        table += '<tr class="row">';
+        table += '<th class="col-lg-1">id</th> <th class="col-lg-4">mark</th> ' +
+            '<th class="col-lg-5">model</th> <th class="col-lg-1"></th> <th class="col-lg-1"></th>';
+        table += '</tr>';
+        for (let i in data.Struct) {
+            let id = data.Struct[i]['id'];
+            table += '<tr class="row">';
+            table += '<td class="col-lg-1">' + id + '</td> <td class="col-lg-4">' +
+            data.Struct[i]['mark'] + '</td> <td class="col-lg-5">' + data.Struct[i]['model'] + '</td>';
+            table += '<td class="col-lg-1">' +
+                '<button type="submit" class="btn btn-primary"' +
+                'onclick="getDetails(' + id + ')">Details</button>' +
+                '</td>';
+            table += '<td class="col-lg-1">' +
+                '<button type="submit" class="btn btn-danger"' +
+                'onclick="getOrderForm(' + id + ')">Order</button>' +
+                '</td>';
+            table += '</tr>';
         }
+        table += '</table>';
+    }
+    return results.innerHTML = table;
     }, "json");
 }
 
@@ -30,7 +39,7 @@ function getDetails(id) {
         'id': id
     };
     $.post(url, formData, function (data) {
-        showOnDetails(data);
+        showOnDetails(data)
     }, "json");
 }
 
@@ -48,7 +57,30 @@ function searchCars() {
         'action': 'searchCars'
     };
     $.post(url, formData, function (data) {
-        showOnTable(data);
+        let table = '<table class="table" id="table">';
+        if (data.Struct.length) {
+            table += '<tr class="row">';
+            table += '<th class="col-lg-1">id</th> <th class="col-lg-4">mark</th> ' +
+                '<th class="col-lg-5">model</th> <th class="col-lg-1"></th> <th class="col-lg-1"></th>';
+            table += '</tr>';
+            for (let i in data.Struct) {
+                let id = data.Struct[i]['id'];
+                table += '<tr class="row">';
+                table += '<td class="col-lg-1">' + id + '</td> <td class="col-lg-4">' +
+                data.Struct[i]['mark'] + '</td> <td class="col-lg-5">' + data.Struct[i]['model'] + '</td>';
+                table += '<td class="col-lg-1">' +
+                    '<button type="submit" class="btn btn-primary"' +
+                    'onclick="getDetails(' + id + ')">Details</button>' +
+                    '</td>';
+                table += '<td class="col-lg-1">' +
+                    '<button type="submit" class="btn btn-danger"' +
+                    'onclick="getOrderForm(' + id + ')">Order</button>' +
+                    '</td>';
+                table += '</tr>';
+            }
+            table += '</table>';
+        }
+        return results.innerHTML = table;
     }, "json");
 
 }
@@ -96,8 +128,7 @@ function getOrderForm(id) {
     }, "html");
 }
 
-function showOnTable(data) {
-    
+/*function showOnTable(data) {
     if (data.length != 0) {
         if (data['errors']) {
             results.innerHTML = '<h3 class="text-danger">Error: ' + data.errors + '</h3>';
@@ -109,7 +140,7 @@ function showOnTable(data) {
         results.innerHTML = '<h3>No cars found.</h3>';
     }
     document.getElementById("details").innerHTML = "";
-}
+}*/
 
 function showOnDetails(entry) {
     let t = document.getElementById("details");

@@ -1,15 +1,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<definitions targetNamespace="http://192.168.0.15/~user4/soap/task2/Server/"
+<definitions targetNamespace="http://mysite.local/soap/task2/Server/"
     xmlns="http://schemas.xmlsoap.org/wsdl/"
     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-    xmlns:tns="http://192.168.0.15/~user4/soap/task2/Server/"
+    xmlns:tns="http://mysite.local/soap/task2/Server/"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding"
     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
     name="AutoStore" 
     >
     <types>
-        <xs:schema targetNamespace="http://192.168.0.15/~user4/soap/task2/Server/">
+        <xs:schema targetNamespace="http://mysite.local/soap/task2/Server/">
         
             <xs:complexType name="AutoStore">
                 <xs:sequence>
@@ -181,7 +181,7 @@
         name="AutostoreService"
         binding="tns:AutostoreServiceBinding">
         <soap:address
-            location="http://192.168.0.15/~user4/soap/task2/Server/index.php"/>
+            location="http://mysite.local/soap/task2/Server/index.php"/>
     </port>
 </service>
 </definitions>

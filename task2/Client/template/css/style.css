@@ -11,3 +11,13 @@ body{
 p{
 	padding: 10px;
 }
+
+.input-group {
+	padding-top: 20px;
+	margin-right: 20px;
+}
+
+.input-group-addon {
+	font-size: 20px;
+	margin-right: 10px;
+}

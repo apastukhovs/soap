@@ -78,7 +78,7 @@
                                 <option>metallic</option>
                                 <option>red</option>
                                 <option>blue</option>
-                                <option>green</option>
+                                <option>brown</option>
                                 <option>orange</option>
                             </select>
                         </div>
